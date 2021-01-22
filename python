@@ -1,0 +1,88 @@
+# Mr Willis’ Evil John Green-bot program for Skyline High School
+# Language = Python
+# Use this compiler:
+# https://www.onlinegdb.com/online_python_compiler#
+
+import time
+import random
+
+def funcWait():
+  waitTime = [1,2,3,4]
+  time.sleep(random.choice(waitTime))
+
+def funcQuestion():
+    question = ["Tell me more about that? ", "And?... ", "Do you want to ask me something? ", "What was the last funny video you saw? ","What do you do to get rid of stress? ","What is something you are obsessed with? ", "Go on. Tell me more.", "What three words best describe you? ","What would be your perfect weekend? ", "What are you going to do this weekend? ", "What’s the most useful thing you own? ","What’s your favorite way to waste time? ","Do you have any pets? ","Where did you go last weekend? ","What is something popular now that annoys you? ","What did you do on your last vacation? ","When was the last time you worked really hard? ","Do you prefer to just relax in your free time? ","What do you do when you hang out with your friends? ","Who is your oldest friend? ","What’s the best thing about Skyline? ","If you could have any animal as a pet, what animal would you choose? "]
+    return random.choice(question)
+    
+def funcAnswer():
+    qAnswer = ["Why is that interesting? ","Is that something that interests you? ","Why do you ask? ","Do you? ","Are you serious? ", "What do you mean? ", "Can you be more specific? ","Why do you want to know? ","Do you? ","I'm not sure what you mean. ","Let me think about that. "]
+    return random.choice(qAnswer)
+
+def funcComment():
+    qComment = ["That's interesting. ","I'd like to learn more about that. ","Interesting. ","Sounds fun. ","That sounds really boring. ", "I don't want to talk about that. ", "Cool. ","Uh huh. ","Hmmmm. ","Wow. "]
+    return random.choice(qComment)
+    
+botName = "Evil John Greenbot"
+
+name = input("> Hello, what is your name? ")
+funcWait()
+print("> Hello " + name + ".\n> My name is " + botName + ".")
+
+funcWait()
+print("> Let's chat. When you're done talking, just say \"bye\".")
+
+
+# Set the default variable values
+oldQuestion = ""
+newQuestion = ""
+answer = ""
+
+while answer != "BYE":
+    # Is the user asking a question?
+    if "?" in answer:
+        # Pause
+        funcWait()
+        # Did the question contain the words, “Do you…”?
+        if "DO YOU" in answer:
+            print("> I want to talk about you.")
+        else:
+            print("> " + funcAnswer())
+    else:
+        # User is NOT asking a question
+        # Did the user say, “I Like…”?
+        if "I LIKE" in answer:
+            # Pause
+            funcWait()
+            print("> I like that too.")
+        else:
+            #Did the user say, “Sometimes…”?
+            if "SOMETIMES" in answer:
+                # Pause
+                funcWait()
+                print("> Yeah. Me too.")
+    
+    #Should the program generate a random comment?
+    if answer != "":
+        makeCommentList = [1,2,3,4,5,6,7,8,9,10]
+        makeComment = random.choice(makeCommentList)
+        if makeComment >=7:
+            # Pause
+            funcWait()
+            # Generate. Random comment
+            print("> " + funcComment())
+            # Pause
+            funcWait()
+        
+    newQuestion = funcQuestion()
+    # Is the new question the same as the old question?
+    if oldQuestion.upper() != newQuestion.upper():
+        # Set the old question value = the new question
+        oldQuestion = newQuestion
+        # Pause
+        funcWait()
+                
+        # Ask the new question
+        answer = input("> " + newQuestion).upper()
+    
+# Bye entered
+print("> Nice talking with you!\nBye " + name + ".")
